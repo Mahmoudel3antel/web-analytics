@@ -1,0 +1,15 @@
+timestamp,session_id,page,country,device,duration
+2026-09-01 10:00:00,S001,/home,Germany,mobile,35
+2026-09-01 10:01:30,S001,/products,Germany,mobile,42
+2026-09-01 10:05:00,S002,/home,Egypt,desktop,15
+2026-09-01 10:06:20,S003,/home,Germany,desktop,8
+2026-09-01 10:07:10,S003,/contact,Germany,desktop,22
+2026-09-01 11:00:00,S004,/products,France,mobile,65
+2026-09-01 11:03:00,S005,/home,Egypt,tablet,18
+2026-09-02 09:00:00,S006,/home,Germany,mobile,32
+2026-09-02 09:02:00,S006,/products,Germany,mobile,50
+2026-09-02 09:10:00,S007,/about,Spain,desktop,27
+2026-09-02 10:15:00,S008,/products,Egypt,mobile,120
+2026-09-02 10:20:00,S009,/home,Germany,desktop,12
+2026-09-02 10:21:00,S009,/contact,Germany,desktop,26
+2026-09-02 12:00:00,S010,/home,France,mobile,7
