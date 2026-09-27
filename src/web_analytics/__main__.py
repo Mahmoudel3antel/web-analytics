@@ -2,6 +2,7 @@ from web_analytics.analyzer import WebsiteAnalyzer
 from web_analytics.statistics import StatisticsAnalyzer
 from web_analytics.loader import load_data
 from web_analytics.plotting import PlotGenerator
+from web_analytics.report import ReportGenerator
 
 
 def main():
@@ -12,6 +13,7 @@ def main():
         analyzer = WebsiteAnalyzer(data)
         statistics = StatisticsAnalyzer(data)
         plots = PlotGenerator(data)
+        report = ReportGenerator()
         
 
         print("Website Analytics Analyzer")
@@ -69,10 +71,21 @@ def main():
             plots.device_distribution(),
             plots.duration_histogram(),
             plots.pageviews_by_date(),
-        ]      
+        ]
 
         for plot_path in generated_plots:
             print(f"Saved: {plot_path}")
+
+        print()
+        print("Generating report")
+        print("-" * 20)
+
+        report_path = report.generate(
+            analyzer,
+            statistics,
+        )
+
+        print(f"Saved: {report_path}")
 
 
 
