@@ -1,4 +1,5 @@
 from web_analytics.analyzer import WebsiteAnalyzer
+from web_analytics.statistics import StatisticsAnalyzer
 from web_analytics.loader import load_data
 
 
@@ -8,6 +9,7 @@ def main():
     try:
         data = load_data(file_path)
         analyzer = WebsiteAnalyzer(data)
+        statistics = StatisticsAnalyzer(data)
 
         print("Website Analytics Analyzer")
         print("=" * 35)
@@ -36,8 +38,28 @@ def main():
         print()
         print("Pageviews by device")
         print("-" * 20)
+        
         print(analyzer.pageviews_by_device())
 
+        print()
+        print("Duration Statistics")
+        print("-" * 20)
+
+        print(f"Mean: {statistics.mean_duration():.2f}")
+        print(f"Median: {statistics.median_duration():.2f}")
+        print(
+            f"Standard deviation: "
+            f"{statistics.standard_deviation():.2f}"
+        )
+        print(f"Minimum: {statistics.minimum_duration():.2f}")
+        print(f"Maximum: {statistics.maximum_duration():.2f}")
+        print(f"25th percentile: {statistics.percentile_25():.2f}")
+        print(f"75th percentile: {statistics.percentile_75():.2f}")
+
+
+
+
+        
     except FileNotFoundError as error:
         print(f"Error: {error}")
 
