@@ -51,3 +51,22 @@ class WebsiteAnalyzer:
             "longest_visit": self.longest_visit(),
             "shortest_visit": self.shortest_visit(),
         }
+
+    def pageviews_by_date(self):
+        daily_views = (
+            self.data
+            .groupby(self.data["timestamp"].dt.date)
+            .size()
+        )
+
+        return daily_views
+
+    def pageviews_by_hour(self):
+        hourly_views = (
+            self.data
+            .groupby(self.data["timestamp"].dt.hour)
+            .size()
+        )
+
+        return hourly_views
+    

@@ -68,6 +68,7 @@ def main():
             plots.pageviews_by_country(),
             plots.device_distribution(),
             plots.duration_histogram(),
+            plots.pageviews_by_date(),
         ]      
 
         for plot_path in generated_plots:

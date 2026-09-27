@@ -95,3 +95,31 @@ class PlotGenerator:
         plt.close()
 
         return file_path
+
+    def pageviews_by_date(self):
+        daily_views = (
+            self.data.groupby(self.data["timestamp"].dt.date)
+            .size()
+        )
+
+        plt.figure()
+
+        daily_views.plot(
+            kind="line",
+            marker="o",
+        )
+
+        plt.title("Pageviews by Date")
+        plt.xlabel("Date")
+        plt.ylabel("Pageviews")
+        plt.tight_layout()
+
+        file_path = os.path.join(
+            self.output_directory,
+            "pageviews_by_date.png",
+        )
+
+        plt.savefig(file_path)
+        plt.close()
+
+        return file_path
