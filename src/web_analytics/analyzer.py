@@ -1,8 +1,10 @@
-class WebsiteAnalyzer:
+from web_analytics.models import BaseAnalyzer
+
+class WebsiteAnalyzer(BaseAnalyzer):
     """Analyze website traffic data."""
 
     def __init__(self, data):
-        self.data = data
+        super().__init__(data)
 
     def total_pageviews(self):
         return len(self.data)
@@ -69,4 +71,7 @@ class WebsiteAnalyzer:
         )
 
         return hourly_views
+    
+    def analyze(self):
+        return self.summary()
     
