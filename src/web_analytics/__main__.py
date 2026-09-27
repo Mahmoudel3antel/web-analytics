@@ -7,11 +7,11 @@ def main():
 
     try:
         data = load_data(file_path)
-
         analyzer = WebsiteAnalyzer(data)
 
         print("Website Analytics Analyzer")
-        print("--------------------------")
+        print("=" * 35)
+
         print(f"Total pageviews: {analyzer.total_pageviews()}")
         print(f"Unique sessions: {analyzer.unique_sessions()}")
         print(
@@ -20,6 +20,23 @@ def main():
         )
         print(f"Countries: {analyzer.number_of_countries()}")
         print(f"Most visited page: {analyzer.most_visited_page()}")
+        print(f"Longest visit: {analyzer.longest_visit()} seconds")
+        print(f"Shortest visit: {analyzer.shortest_visit()} seconds")
+
+        print()
+        print("Pageviews by page")
+        print("-" * 20)
+        print(analyzer.pageviews_by_page())
+
+        print()
+        print("Pageviews by country")
+        print("-" * 20)
+        print(analyzer.pageviews_by_country())
+
+        print()
+        print("Pageviews by device")
+        print("-" * 20)
+        print(analyzer.pageviews_by_device())
 
     except FileNotFoundError as error:
         print(f"Error: {error}")

@@ -19,6 +19,28 @@ class WebsiteAnalyzer:
     def most_visited_page(self):
         return self.data["page"].value_counts().idxmax()
 
+    def pageviews_by_page(self):
+        return self.data["page"].value_counts()
+
+    def pageviews_by_country(self):
+        return self.data["country"].value_counts()
+
+    def pageviews_by_device(self):
+        return self.data["device"].value_counts()
+
+    def average_duration_by_page(self):
+        return (
+            self.data.groupby("page")["duration"]
+            .mean()
+            .sort_values(ascending=False)
+        )
+
+    def longest_visit(self):
+        return self.data["duration"].max()
+
+    def shortest_visit(self):
+        return self.data["duration"].min()
+
     def summary(self):
         return {
             "pageviews": self.total_pageviews(),
@@ -26,4 +48,6 @@ class WebsiteAnalyzer:
             "average_duration": self.average_duration(),
             "countries": self.number_of_countries(),
             "top_page": self.most_visited_page(),
+            "longest_visit": self.longest_visit(),
+            "shortest_visit": self.shortest_visit(),
         }
