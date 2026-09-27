@@ -1,6 +1,7 @@
 from web_analytics.analyzer import WebsiteAnalyzer
 from web_analytics.statistics import StatisticsAnalyzer
 from web_analytics.loader import load_data
+from web_analytics.plotting import PlotGenerator
 
 
 def main():
@@ -10,6 +11,8 @@ def main():
         data = load_data(file_path)
         analyzer = WebsiteAnalyzer(data)
         statistics = StatisticsAnalyzer(data)
+        plots = PlotGenerator(data)
+        
 
         print("Website Analytics Analyzer")
         print("=" * 35)
@@ -55,6 +58,20 @@ def main():
         print(f"Maximum: {statistics.maximum_duration():.2f}")
         print(f"25th percentile: {statistics.percentile_25():.2f}")
         print(f"75th percentile: {statistics.percentile_75():.2f}")
+
+        print()
+        print("Generating plots")
+        print("-" * 20)
+
+        generated_plots = [
+            plots.pageviews_by_page(),
+            plots.pageviews_by_country(),
+            plots.device_distribution(),
+            plots.duration_histogram(),
+        ]      
+
+        for plot_path in generated_plots:
+            print(f"Saved: {plot_path}")
 
 
 
