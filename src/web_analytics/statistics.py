@@ -56,4 +56,26 @@ class StatisticsAnalyzer(BaseAnalyzer):
             "maximum": self.maximum_duration(),
             "percentile_25": self.percentile_25(),
             "percentile_75": self.percentile_75(),
+            "outliers": self.number_of_outliers(),
         }
+
+    def duration_outliers(self):
+        durations = self.duration_array()
+
+        q1 = np.percentile(durations, 25)
+        q3 = np.percentile(durations, 75)
+
+        iqr = q3 - q1
+
+        lower_bound = q1 - (1.5 * iqr)
+        upper_bound = q3 + (1.5 * iqr)
+
+        outliers = durations[
+            (durations < lower_bound)
+            | (durations > upper_bound)
+        ]
+
+        return outliers
+
+    def number_of_outliers(self):
+        return len(self.duration_outliers())

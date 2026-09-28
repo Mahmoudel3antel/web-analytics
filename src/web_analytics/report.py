@@ -35,7 +35,10 @@ class ReportGenerator:
                 "Duplicate rows: "
                 f"{website_results['duplicate_rows']}"
             ),
-
+            (
+                "Duration outliers: "
+                f"{statistics_results['outliers']}"
+            ),
             (
                 "Longest visit: "
                 f"{website_results['longest_visit']:.2f} seconds"
