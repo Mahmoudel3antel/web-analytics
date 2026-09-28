@@ -97,6 +97,18 @@ def main():
 
         print(f"Saved: {report_path}")
 
+        print()
+        print("Data Quality")
+        print("-" * 20)
+
+        print(f"Missing values: {analyzer.total_missing_values()}")
+        print(f"Duplicate rows: {analyzer.duplicate_rows()}")
+
+        print()
+        print("Missing values by column")
+        print("-" * 20)
+        print(analyzer.missing_values())
+
 
 
 

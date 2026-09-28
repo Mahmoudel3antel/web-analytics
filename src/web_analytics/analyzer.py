@@ -52,6 +52,8 @@ class WebsiteAnalyzer(BaseAnalyzer):
             "top_page": self.most_visited_page(),
             "longest_visit": self.longest_visit(),
             "shortest_visit": self.shortest_visit(),
+            "missing_values": self.total_missing_values(),
+            "duplicate_rows": self.duplicate_rows(),
         }
 
     def pageviews_by_date(self):
@@ -74,4 +76,13 @@ class WebsiteAnalyzer(BaseAnalyzer):
     
     def analyze(self):
         return self.summary()
+
+    def missing_values(self):
+        return self.data.isna().sum()
+
+    def total_missing_values(self):
+        return self.data.isna().sum().sum()
+    def duplicate_rows(self):
+        return self.data.duplicated().sum()
+
     

@@ -28,6 +28,15 @@ class ReportGenerator:
             f"Countries: {website_results['countries']}",
             f"Most visited page: {website_results['top_page']}",
             (
+                "Missing values: "
+                f"{website_results['missing_values']}"
+            ),
+            (
+                "Duplicate rows: "
+                f"{website_results['duplicate_rows']}"
+            ),
+
+            (
                 "Longest visit: "
                 f"{website_results['longest_visit']:.2f} seconds"
             ),
