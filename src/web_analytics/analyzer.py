@@ -132,7 +132,37 @@ class WebsiteAnalyzer(BaseAnalyzer):
         total_pageviews = self.total_pageviews()
 
         return (top_device_count / total_pageviews) * 100
-    
+    def top_pages(self, limit=3):
+        return self.data["page"].value_counts().head(limit)
+
+    def top_countries(self, limit=3):
+        return self.data["country"].value_counts().head(limit)
+
+
+    def country_percentages(self):
+        counts = self.data["country"].value_counts()
+        total = self.total_pageviews()
+
+        return (counts / total) * 100
+
+
+    def device_percentages(self):
+        counts = self.data["device"].value_counts()
+        total = self.total_pageviews()
+
+        return (counts / total) * 100
+    def average_duration_by_device(self):
+        return (
+            self.data.groupby("device")["duration"]
+            .mean()
+            .sort_values(ascending=False)
+        )
+    def average_duration_by_country(self):
+        return (
+            self.data.groupby("country")["duration"]
+            .mean()
+            .sort_values(ascending=False)
+        )
 
 
     

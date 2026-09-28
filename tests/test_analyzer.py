@@ -63,30 +63,59 @@ class TestWebsiteAnalyzer(unittest.TestCase):
         self.assertEqual(pages["S001"], 2)
         self.assertEqual(pages["S002"], 1)
 
-    def test_average_pages_per_session(self):
-        self.assertEqual(
-            self.analyzer.average_pages_per_session(),
-            1.5,
-        )
 
-    def test_single_page_sessions(self):
-        self.assertEqual(
-            self.analyzer.single_page_sessions(),
-            1,
-        )
+def test_average_pages_per_session(self):
+    self.assertEqual(
+        self.analyzer.average_pages_per_session(),
+        1.5,
+    )
 
-    def test_bounce_rate(self):
-        self.assertEqual(
-            self.analyzer.bounce_rate(),
-            50,
-        )
 
-    def test_top_device(self):
-        self.assertEqual(
-            self.analyzer.top_device(),
-            "mobile",
-        )
+def test_single_page_sessions(self):
+    self.assertEqual(
+        self.analyzer.single_page_sessions(),
+        1,
+    )
 
+
+def test_bounce_rate(self):
+    self.assertEqual(
+        self.analyzer.bounce_rate(),
+        50,
+    )
+
+
+def test_top_device(self):
+    self.assertEqual(
+        self.analyzer.top_device(),
+        "mobile",
+    )   
+
+def test_top_pages(self):
+    top_pages = self.analyzer.top_pages()
+
+    self.assertEqual(
+        top_pages.index[0],
+        "/home",
+    )
+
+
+def test_country_percentages_sum(self):
+    percentages = self.analyzer.country_percentages()
+
+    self.assertAlmostEqual(
+        percentages.sum(),
+        100,
+    )
+
+
+def test_device_percentages_sum(self):
+    percentages = self.analyzer.device_percentages()
+
+    self.assertAlmostEqual(
+        percentages.sum(),
+        100,
+    )
 
 if __name__ == "__main__":
     unittest.main()

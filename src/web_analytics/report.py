@@ -6,12 +6,16 @@ class ReportGenerator:
 
     def __init__(self, output_directory="output"):
         self.output_directory = output_directory
-
         os.makedirs(self.output_directory, exist_ok=True)
 
     def generate(self, website_analyzer, statistics_analyzer):
         website_results = website_analyzer.analyze()
         statistics_results = statistics_analyzer.analyze()
+
+        top_pages = website_analyzer.top_pages()
+        top_countries = website_analyzer.top_countries()
+        country_percentages = website_analyzer.country_percentages()
+        device_percentages = website_analyzer.device_percentages()
 
         report_lines = [
             "WEBSITE ANALYTICS REPORT",
@@ -89,7 +93,43 @@ class ReportGenerator:
                 "Duration outliers: "
                 f"{statistics_results['outliers']}"
             ),
+            "",
+            "TOP PAGES",
+            "-" * 40,
         ]
+
+        for page, count in top_pages.items():
+            report_lines.append(
+                f"{page}: {count} pageviews"
+            )
+
+        report_lines.extend(
+            [
+                "",
+                "TOP COUNTRIES",
+                "-" * 40,
+            ]
+        )
+
+        for country, count in top_countries.items():
+            percentage = country_percentages[country]
+
+            report_lines.append(
+                f"{country}: {count} pageviews ({percentage:.2f}%)"
+            )
+
+        report_lines.extend(
+            [
+                "",
+                "DEVICE DISTRIBUTION",
+                "-" * 40,
+            ]
+        )
+
+        for device, percentage in device_percentages.items():
+            report_lines.append(
+                f"{device}: {percentage:.2f}%"
+            )
 
         report_text = "\n".join(report_lines)
 
