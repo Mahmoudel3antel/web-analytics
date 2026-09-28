@@ -36,10 +36,6 @@ class ReportGenerator:
                 f"{website_results['duplicate_rows']}"
             ),
             (
-                "Duration outliers: "
-                f"{statistics_results['outliers']}"
-            ),
-            (
                 "Longest visit: "
                 f"{website_results['longest_visit']:.2f} seconds"
             ),
@@ -65,6 +61,10 @@ class ReportGenerator:
             (
                 "75th percentile: "
                 f"{statistics_results['percentile_75']:.2f}"
+            ),
+            (
+                "Duration outliers: "
+                f"{statistics_results['outliers']}"
             ),
         ]
 
