@@ -44,6 +44,29 @@ class ReportGenerator:
                 f"{website_results['shortest_visit']:.2f} seconds"
             ),
             "",
+            "SESSION METRICS",
+            "-" * 40,
+            (
+                "Average pages per session: "
+                f"{website_results['average_pages_per_session']:.2f}"
+            ),
+            (
+                "Bounce rate: "
+                f"{website_results['bounce_rate']:.2f}%"
+            ),
+            (
+                "Busiest hour: "
+                f"{website_results['busiest_hour']}:00"
+            ),
+            (
+                "Top device: "
+                f"{website_results['top_device']}"
+            ),
+            (
+                "Top device share: "
+                f"{website_results['top_device_percentage']:.2f}%"
+            ),
+            "",
             "DURATION STATISTICS",
             "-" * 40,
             f"Mean: {statistics_results['mean']:.2f}",

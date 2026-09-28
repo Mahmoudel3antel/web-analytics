@@ -57,6 +57,36 @@ class TestWebsiteAnalyzer(unittest.TestCase):
             0,
         )
 
+    def test_pages_per_session(self):
+        pages = self.analyzer.pages_per_session()
+
+        self.assertEqual(pages["S001"], 2)
+        self.assertEqual(pages["S002"], 1)
+
+    def test_average_pages_per_session(self):
+        self.assertEqual(
+            self.analyzer.average_pages_per_session(),
+            1.5,
+        )
+
+    def test_single_page_sessions(self):
+        self.assertEqual(
+            self.analyzer.single_page_sessions(),
+            1,
+        )
+
+    def test_bounce_rate(self):
+        self.assertEqual(
+            self.analyzer.bounce_rate(),
+            50,
+        )
+
+    def test_top_device(self):
+        self.assertEqual(
+            self.analyzer.top_device(),
+            "mobile",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

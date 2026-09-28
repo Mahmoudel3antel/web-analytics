@@ -109,6 +109,39 @@ def main():
         print("-" * 20)
         print(analyzer.missing_values())
 
+        print(
+            f"Duration outliers: "
+            f"{statistics.number_of_outliers()}"
+        )
+        print()
+        print("Session Metrics")
+        print("-" * 20)
+
+        print(
+            f"Average pages per session: "
+            f"{analyzer.average_pages_per_session():.2f}"
+        )
+
+        print(
+            f"Bounce rate: "
+            f"{analyzer.bounce_rate():.2f}%"
+        )
+
+        print(
+            f"Busiest hour: "
+            f"{analyzer.busiest_hour()}:00"
+        )
+
+        print(
+            f"Top device: "
+            f"{analyzer.top_device()}"
+        )
+
+        print(
+            f"Top device share: "
+            f"{analyzer.top_device_percentage():.2f}%"
+        )
+
 
 
 

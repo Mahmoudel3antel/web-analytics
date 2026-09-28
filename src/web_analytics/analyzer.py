@@ -54,6 +54,11 @@ class WebsiteAnalyzer(BaseAnalyzer):
             "shortest_visit": self.shortest_visit(),
             "missing_values": self.total_missing_values(),
             "duplicate_rows": self.duplicate_rows(),
+            "average_pages_per_session": self.average_pages_per_session(),
+            "bounce_rate": self.bounce_rate(),
+            "busiest_hour": self.busiest_hour(),
+            "top_device": self.top_device(),
+            "top_device_percentage": self.top_device_percentage(),
         }
 
     def pageviews_by_date(self):
@@ -84,5 +89,50 @@ class WebsiteAnalyzer(BaseAnalyzer):
         return self.data.isna().sum().sum()
     def duplicate_rows(self):
         return self.data.duplicated().sum()
+    def pages_per_session(self):
+        pages_per_session = (
+            self.data.groupby("session_id")
+            .size()
+        )
+
+        return pages_per_session
+
+
+    def average_pages_per_session(self):
+        pages_per_session = self.pages_per_session()
+
+        return pages_per_session.mean()
+
+
+    def single_page_sessions(self):
+        pages_per_session = self.pages_per_session()
+
+        return (pages_per_session == 1).sum()
+
+
+    def bounce_rate(self):
+        total_sessions = self.unique_sessions()
+
+        if total_sessions == 0:
+            return 0.0
+
+        bounced_sessions = self.single_page_sessions()
+
+        return (bounced_sessions / total_sessions) * 100
+    def busiest_hour(self):
+        hourly_views = self.pageviews_by_hour()
+
+        return hourly_views.idxmax()
+    def top_device(self):
+        return self.data["device"].value_counts().idxmax()
+    def top_device_percentage(self):
+        device_counts = self.data["device"].value_counts()
+
+        top_device_count = device_counts.max()
+        total_pageviews = self.total_pageviews()
+
+        return (top_device_count / total_pageviews) * 100
+    
+
 
     
