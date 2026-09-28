@@ -16,6 +16,9 @@ class ReportGenerator:
         top_countries = website_analyzer.top_countries()
         country_percentages = website_analyzer.country_percentages()
         device_percentages = website_analyzer.device_percentages()
+        duration_by_page = website_analyzer.average_duration_by_page()
+        duration_by_device = website_analyzer.average_duration_by_device()
+        duration_by_country = website_analyzer.average_duration_by_country()
 
         report_lines = [
             "WEBSITE ANALYTICS REPORT",
@@ -129,6 +132,45 @@ class ReportGenerator:
         for device, percentage in device_percentages.items():
             report_lines.append(
                 f"{device}: {percentage:.2f}%"
+            )
+
+        report_lines.extend(
+        [
+            "",
+            "AVERAGE DURATION BY PAGE",
+            "-" * 40,
+        ]
+        )
+
+        for page, duration in duration_by_page.items():
+            report_lines.append(
+                f"{page}: {duration:.2f} seconds"
+            )
+
+        report_lines.extend(
+            [
+                "",
+                "AVERAGE DURATION BY DEVICE",
+                "-" * 40,
+            ]
+        )
+
+        for device, duration in duration_by_device.items():
+            report_lines.append(
+                f"{device}: {duration:.2f} seconds"
+            )
+
+        report_lines.extend(
+            [
+                "",
+                "AVERAGE DURATION BY COUNTRY",
+                "-" * 40,
+            ]
+        )
+
+        for country, duration in duration_by_country.items():
+            report_lines.append(
+                f"{country}: {duration:.2f} seconds"
             )
 
         report_text = "\n".join(report_lines)
