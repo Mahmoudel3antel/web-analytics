@@ -3,17 +3,27 @@ from web_analytics.statistics import StatisticsAnalyzer
 from web_analytics.loader import load_data
 from web_analytics.plotting import PlotGenerator
 from web_analytics.report import ReportGenerator
+import sys
 
 
 def main():
-    file_path = "data/website_events.csv"
+    if len(sys.argv) < 2:
+        print("Usage: uv run -m web_analytics <csv_file> [output_directory]")
+        return
+
+    file_path = sys.argv[1]
+
+    if len(sys.argv) >= 3:
+        output_directory = sys.argv[2]
+    else:
+        output_directory = "output"
 
     try:
         data = load_data(file_path)
         analyzer = WebsiteAnalyzer(data)
         statistics = StatisticsAnalyzer(data)
-        plots = PlotGenerator(data)
-        report = ReportGenerator()
+        plots = PlotGenerator(data, output_directory)
+        report = ReportGenerator(output_directory)
         
 
         print("Website Analytics Analyzer")
