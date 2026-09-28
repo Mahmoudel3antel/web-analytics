@@ -162,7 +162,7 @@ class WebsiteAnalyzer(BaseAnalyzer):
             self.data.groupby("country")["duration"]
             .mean()
             .sort_values(ascending=False)
-        )
+       )
 
 
     
